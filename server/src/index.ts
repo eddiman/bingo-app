@@ -26,6 +26,7 @@ newPersonArray.push(newPerson);
 arrayToJsonFile("./data/parsedData", newPersonArray)
 
 
+
 function convertSalary(salary : string) {
     const cleanSalary = salary.replace(/[^0-9]/g,'');
     //"425 000,00 kr" = "42500000"

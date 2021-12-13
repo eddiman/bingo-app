@@ -1,0 +1,21 @@
+{
+  "name": "my_package",
+  "description": "",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc && node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:eddiman/kode24-salary.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "csvtojson": "^2.0.10"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.12"
+  }
+}
