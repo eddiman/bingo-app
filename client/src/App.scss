@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald&display=swap');
+.root {
+  display: flex;
+}
+
+h1, h2, h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  margin: 0;
+}
+
+h1 {
+  font-size: 3rem;
+  margin: 0 0 1rem 0;
+}
+
+h2 {
+  font-size: 2.25rem;
+}
+
+p, span, a {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+}
+

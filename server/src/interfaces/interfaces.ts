@@ -15,12 +15,14 @@ interface IPerson {
 
 interface IAgeAverage
  {
+     groupName : string,
     avgSalary : number,
     organizedAmount : number
     avgEducation : number,  
+    nonValidEducation : number,  
     avgWorkExperience : number,
     privateSectorAmount : number,
     publicSectorAmount : number
     noSectorAmount : number
-    
+    groupSize : number
 }
