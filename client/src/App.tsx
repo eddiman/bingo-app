@@ -21,21 +21,54 @@ border:black 1px solid;
   width:100%;
   height: .5rem;
   display:flex;
+  
+    transition: height .2s ease-in-out;
+    &:hover {
+      height:2rem;
+    
+
+  }
   .color-1 {
-    background-color: #6A5EED;
+    background-color: #49d08a;
     flex:1;
+    animation: anim1 30s infinite ease-in-out;
   }
   .color-2 {
-    background-color: #ED5E5E;
+    background-color: #4466cd;
     flex:2;
+    animation: anim2 22s infinite ease-in-out;
+    
   }
   .color-3 {
-    background-color: #77ED5A;
+    background-color: #ff9555;
     flex:3;
+
   }
   .color-4 {
-    background-color: #EDE15E;
+    background-color: #ffbe4f;
     flex:4;
+    animation: anim2 26s infinite ease-in-out;
+    
+  }
+  .color-5 {
+    background-color: #68519e;
+    flex:5;
+  }
+
+  @keyframes anim1 {
+    0% {flex:1;}
+    50% {flex:8;}
+    100% {flex:1;}
+  }
+  @keyframes anim2 {
+    0% {flex:2;}
+    50% {flex:4;}
+    100% {flex:2;}
+  }
+  @keyframes anim4 {
+    0% {flex:4;}
+    50% {flex:1;}
+    100% {flex:4;}
   }
 }
 `;
@@ -89,6 +122,7 @@ function App() {
           <div className='color-2' />
           <div className='color-3' />
           <div className='color-4' />
+          <div className='color-5' />
         </div>
         <MainContainer>
           <Header>
