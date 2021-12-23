@@ -18,11 +18,16 @@ interface IAgeAverage
      groupName : string,
     avgSalary : number,
     organizedAmount : number
+    nonOrganizedAmount : number
+    organizedPercent : number
     avgEducation : number,  
     nonValidEducation : number,  
     avgWorkExperience : number,
     privateSectorAmount : number,
+    privateSectorPercent : number,
     publicSectorAmount : number
+    publicSectorPercent : number
     noSectorAmount : number
-    groupSize : number
+    groupSize : number,
+    minMaxSalary : number[],
 }

@@ -4801,16 +4801,6 @@
     },
     {
         "age": 26,
-        "county": "Vestland",
-        "jobRole": "konsulent",
-        "typeOfEmployer": "ikke oppgitt",
-        "education": 6,
-        "workExperience": 4,
-        "salary": 7600000,
-        "unionOrganized": false
-    },
-    {
-        "age": 26,
         "county": "Oslo",
         "jobRole": "konsulent",
         "typeOfEmployer": "privat",
@@ -6624,16 +6614,6 @@
         "county": "Oslo",
         "jobRole": "konsulent",
         "typeOfEmployer": "privat",
-        "education": 2,
-        "workExperience": 9,
-        "salary": 0,
-        "unionOrganized": true
-    },
-    {
-        "age": 31,
-        "county": "Oslo",
-        "jobRole": "konsulent",
-        "typeOfEmployer": "privat",
         "education": 6,
         "workExperience": 6,
         "salary": 711000,
@@ -8401,16 +8381,6 @@
     },
     {
         "age": 31,
-        "county": "Oslo",
-        "jobRole": "konsulent",
-        "typeOfEmployer": "privat",
-        "education": 5,
-        "workExperience": 6,
-        "salary": 7900000,
-        "unionOrganized": true
-    },
-    {
-        "age": 31,
         "county": "Vestfold og Telemark",
         "jobRole": "in-house",
         "typeOfEmployer": "privat",
@@ -9761,16 +9731,6 @@
     },
     {
         "age": 36,
-        "county": "Trøndelag",
-        "jobRole": "konsulent",
-        "typeOfEmployer": "ikke oppgitt",
-        "education": -1,
-        "workExperience": 15,
-        "salary": 0,
-        "unionOrganized": false
-    },
-    {
-        "age": 36,
         "county": "Viken",
         "jobRole": "frilans / selvstendig næringsdrivende",
         "typeOfEmployer": "privat",
@@ -10248,16 +10208,6 @@
         "workExperience": 14,
         "salary": 810000,
         "unionOrganized": true
-    },
-    {
-        "age": 36,
-        "county": "Viken",
-        "jobRole": "frilans / selvstendig næringsdrivende",
-        "typeOfEmployer": "privat",
-        "education": 0,
-        "workExperience": 0,
-        "salary": 0,
-        "unionOrganized": false
     },
     {
         "age": 36,
@@ -11962,16 +11912,6 @@
     {
         "age": 36,
         "county": "Oslo",
-        "jobRole": "konsulent",
-        "typeOfEmployer": "privat",
-        "education": 1,
-        "workExperience": 13,
-        "salary": 0,
-        "unionOrganized": true
-    },
-    {
-        "age": 36,
-        "county": "Oslo",
         "jobRole": "in-house",
         "typeOfEmployer": "offentlig",
         "education": 5,
@@ -13208,16 +13148,6 @@
         "workExperience": 13,
         "salary": 570000,
         "unionOrganized": false
-    },
-    {
-        "age": 41,
-        "county": "Oslo",
-        "jobRole": "konsulent",
-        "typeOfEmployer": "privat",
-        "education": 2,
-        "workExperience": 12,
-        "salary": 0,
-        "unionOrganized": true
     },
     {
         "age": 41,

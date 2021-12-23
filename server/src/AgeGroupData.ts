@@ -36,7 +36,6 @@ function sortAgeGroups() {
     }
 }
 
-console.log(ageGroups.length);
 
 for (let i = 0; i < ageGroups.length; i++) {
     let group: IPerson[] = ageGroups[i];
@@ -50,11 +49,14 @@ for (let i = 0; i < ageGroups.length; i++) {
     let publicSectorAmount = 0
     let privateSectorAmount = 0
     let noSectorAmount = 0
+    let maxSalary = 0;
+    let minSalary = 0;
 
     for (let j = 0; j < group.length; j++) {
         let dataPerson: IPerson = group[j];
 
         acumulatedSalary = acumulatedSalary + dataPerson.salary;
+
         organizedAmount = dataPerson.unionOrganized ? organizedAmount + 1 : organizedAmount;
         accumulatedWorkExperience = accumulatedWorkExperience + dataPerson.workExperience;
         accumulatedEducation = dataPerson.education !== -1 ? accumulatedEducation + dataPerson.education : accumulatedEducation;
@@ -63,21 +65,31 @@ for (let i = 0; i < ageGroups.length; i++) {
         publicSectorAmount = dataPerson.typeOfEmployer === "offentlig" ? publicSectorAmount + 1 : publicSectorAmount;
         privateSectorAmount = dataPerson.typeOfEmployer === "privat" ? privateSectorAmount + 1 : privateSectorAmount;
         noSectorAmount = dataPerson.typeOfEmployer === "ikke oppgitt" ? noSectorAmount + 1 : noSectorAmount;
-
     }
 
+    const minSalaryPerson = group.reduce(function(prev, curr) {
+        return prev.salary < curr.salary ? prev : curr;
+    });
+    const maxSalaryPerson = group.reduce(function(prev, curr) {
+        return prev.salary > curr.salary ? prev : curr;
+    });
+
     let ageGroupAverage: IAgeAverage = {
-        groupName: ageGroups[i + 1] && ageGroups[i + 1][0] ? (ageGroups[i][0].age - 1) + " - " + (ageGroups[i + 1][0].age - 2) + " år" : "+ år",
+        groupName: ageGroups[i + 1] && ageGroups[i + 1][0] ? (ageGroups[i][0].age - 1) + " - " + (ageGroups[i + 1][0].age - 2) + " år" : (ageGroups[i][0].age - 1)+"+ år",
         avgSalary: round(acumulatedSalary / group.length, 0),
         organizedAmount: organizedAmount,
+        nonOrganizedAmount: group.length - organizedAmount,
+        organizedPercent: round(organizedAmount/group.length * 100, 0),
         avgWorkExperience: round(accumulatedWorkExperience / group.length, 2),
         avgEducation: round(accumulatedEducation / (group.length - nonValidEducationAmount), 2),
         nonValidEducation: nonValidEducationAmount,
         privateSectorAmount: privateSectorAmount,
+        privateSectorPercent: round(privateSectorAmount/group.length * 100, 0),
         publicSectorAmount: publicSectorAmount,
+        publicSectorPercent: round(publicSectorAmount/group.length * 100, 0),
         noSectorAmount: noSectorAmount,
         groupSize: group.length,
-
+        minMaxSalary: [minSalaryPerson.salary, maxSalaryPerson.salary],
     }
     finalAgeGroups.push(ageGroupAverage);
 }

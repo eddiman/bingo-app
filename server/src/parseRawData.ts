@@ -19,9 +19,16 @@ let newPerson : IPerson = {
     unionOrganized: Object.values(dataPerson)[11] === "Ja" ? true : false 
 };
 
+if (newPerson.salary !== 0) {
+    newPersonArray.push(newPerson);
 
-newPersonArray.push(newPerson);
+    if(newPerson.salary === 7900000) {
 
+        console.log(newPerson);
+        console.log(dataPerson);
+    }
+    
+}
 }); 
 arrayToJsonFile("./data/parsedData", newPersonArray)
 
@@ -29,6 +36,7 @@ arrayToJsonFile("./data/parsedData", newPersonArray)
 function convertSalary(salary : string) {
     const cleanSalary = salary.replace(/[^0-9]/g,'');
     //"425 000,00 kr" = "42500000"
+    
     const splicedSalary = cleanSalary.slice(0, -2);
     //Slices the last two zeros
     //"42500000 = "425000"

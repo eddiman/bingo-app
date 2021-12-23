@@ -3,84 +3,140 @@
         "groupName": "20 - 24 år",
         "avgSalary": 547006,
         "organizedAmount": 54,
+        "nonOrganizedAmount": 72,
+        "organizedPercent": 43,
         "avgWorkExperience": 1.6,
         "avgEducation": 2.67,
         "nonValidEducation": 43,
         "privateSectorAmount": 67,
+        "privateSectorPercent": 53,
         "publicSectorAmount": 8,
+        "publicSectorPercent": 6,
         "noSectorAmount": 51,
-        "groupSize": 126
+        "groupSize": 126,
+        "minMaxSalary": [
+            220000,
+            1462000
+        ]
     },
     {
         "groupName": "25 - 29 år",
-        "avgSalary": 646410,
+        "avgSalary": 630713,
         "organizedAmount": 210,
-        "avgWorkExperience": 3.07,
+        "nonOrganizedAmount": 233,
+        "organizedPercent": 47,
+        "avgWorkExperience": 3.06,
         "avgEducation": 3.78,
         "nonValidEducation": 130,
         "privateSectorAmount": 260,
+        "privateSectorPercent": 59,
         "publicSectorAmount": 20,
-        "noSectorAmount": 164,
-        "groupSize": 444
+        "publicSectorPercent": 5,
+        "noSectorAmount": 163,
+        "groupSize": 443,
+        "minMaxSalary": [
+            350000,
+            1650000
+        ]
     },
     {
         "groupName": "30 - 34 år",
-        "avgSalary": 740451,
-        "organizedAmount": 143,
-        "avgWorkExperience": 6.13,
+        "avgSalary": 724159,
+        "organizedAmount": 141,
+        "nonOrganizedAmount": 253,
+        "organizedPercent": 36,
+        "avgWorkExperience": 6.12,
         "avgEducation": 3.66,
         "nonValidEducation": 117,
-        "privateSectorAmount": 232,
+        "privateSectorAmount": 230,
+        "privateSectorPercent": 58,
         "publicSectorAmount": 25,
+        "publicSectorPercent": 6,
         "noSectorAmount": 139,
-        "groupSize": 396
+        "groupSize": 394,
+        "minMaxSalary": [
+            400000,
+            2486250
+        ]
     },
     {
         "groupName": "35 - 39 år",
-        "avgSalary": 795359,
-        "organizedAmount": 111,
-        "avgWorkExperience": 10.82,
-        "avgEducation": 4.06,
-        "nonValidEducation": 73,
-        "privateSectorAmount": 165,
+        "avgSalary": 804397,
+        "organizedAmount": 110,
+        "nonOrganizedAmount": 154,
+        "organizedPercent": 42,
+        "avgWorkExperience": 10.83,
+        "avgEducation": 4.09,
+        "nonValidEducation": 72,
+        "privateSectorAmount": 163,
+        "privateSectorPercent": 62,
         "publicSectorAmount": 19,
-        "noSectorAmount": 83,
-        "groupSize": 267
+        "publicSectorPercent": 7,
+        "noSectorAmount": 82,
+        "groupSize": 264,
+        "minMaxSalary": [
+            145098,
+            1850000
+        ]
     },
     {
         "groupName": "40 - 44 år",
-        "avgSalary": 847669,
-        "organizedAmount": 60,
-        "avgWorkExperience": 15.34,
-        "avgEducation": 3.91,
+        "avgSalary": 852715,
+        "organizedAmount": 59,
+        "nonOrganizedAmount": 109,
+        "organizedPercent": 35,
+        "avgWorkExperience": 15.36,
+        "avgEducation": 3.92,
         "nonValidEducation": 53,
-        "privateSectorAmount": 97,
+        "privateSectorAmount": 96,
+        "privateSectorPercent": 57,
         "publicSectorAmount": 7,
+        "publicSectorPercent": 4,
         "noSectorAmount": 65,
-        "groupSize": 169
+        "groupSize": 168,
+        "minMaxSalary": [
+            430500,
+            1700000
+        ]
     },
     {
         "groupName": "45 - 49 år",
         "avgSalary": 858629,
         "organizedAmount": 40,
+        "nonOrganizedAmount": 56,
+        "organizedPercent": 42,
         "avgWorkExperience": 20.49,
         "avgEducation": 4.22,
         "nonValidEducation": 28,
         "privateSectorAmount": 61,
+        "privateSectorPercent": 64,
         "publicSectorAmount": 2,
+        "publicSectorPercent": 2,
         "noSectorAmount": 33,
-        "groupSize": 96
+        "groupSize": 96,
+        "minMaxSalary": [
+            500000,
+            1800000
+        ]
     },
     {
-        "groupName": "+ år",
+        "groupName": "50+ år",
         "avgSalary": 892928,
         "organizedAmount": 22,
+        "nonOrganizedAmount": 21,
+        "organizedPercent": 51,
         "avgWorkExperience": 26.77,
         "avgEducation": 4.29,
         "nonValidEducation": 8,
         "privateSectorAmount": 33,
+        "privateSectorPercent": 77,
         "publicSectorAmount": 3,
+        "publicSectorPercent": 7,
         "noSectorAmount": 7,
-        "groupSize": 43
+        "groupSize": 43,
+        "minMaxSalary": [
+            540000,
+            1500000
+        ]
     }
 ]

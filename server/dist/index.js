@@ -26,7 +26,8 @@ const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
 const fs = __importStar(require("fs"));
 const ageGroupAvgData = JSON.parse(fs.readFileSync('./data/ageGroupAvgData.json', 'utf-8'));
-app.get('/AgeGroupAvg', (req, res) => {
+app.get('/age-group-avg', (req, res) => {
+    console.log("age-group-avg");
     res.send(ageGroupAvgData);
 });
-app.listen(3000);
+app.listen(3001);
