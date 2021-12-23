@@ -1,25 +1,100 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald&display=swap');
-.root {
-  display: flex;
-}
+@import "rfs/scss";
 
-h1, h2, h3 {
+html{
+  font-family: "Open Sans";
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+body {
+  margin: 0;
+} 
+
+h1, h2, h3, h4 {
   font-family: 'Bebas Neue', sans-serif;
   margin: 0;
+  letter-spacing: 1.5px;
 }
 
 h1 {
-  font-size: 3rem;
   margin: 0 0 1rem 0;
 }
 
-h2 {
-  font-size: 2.25rem;
+p, span, a, tspan, button {
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 0.5px;
 }
 
-p, span, a {
-  font-family: 'Oswald', sans-serif;
-  font-size: 1rem;
+tspan {   
+   @include font-size(1rem);
+    line-height: 1rem;
+
+    
 }
+
+
+    h1 {
+    @include font-size(3rem);
+    line-height: 56px;
+    font-weight: 700;
+    }
+    
+    h2 {
+    @include font-size(2rem);
+    line-height: 40px;
+    font-weight: 700;
+    }
+    
+    h3 {
+    @include font-size(1.5rem);
+    line-height: 32px;
+    font-weight: 700;
+    }
+    h4 {
+    @include font-size(1.25rem);
+    line-height: 32px;
+    font-weight: 700;
+    }
+    
+    .lead {
+    @include font-size(1.25rem);
+    line-height: 32px;
+    }
+    
+    p {
+    @include font-size(1rem);
+    line-height: 28px;
+    }
+    button {
+    @include font-size(1rem);
+    line-height: 28px;
+    }
+
+    a {
+    @include font-size(1rem);
+    line-height: 28px;
+    }
+    
+    .paragraph-bold {
+    @include font-size(1rem);    
+    line-height: 28px;
+    font-weight: 700;
+    }
+    
+    .paragraph-ital {
+    @include font-size(1rem);
+    line-height: 28px;
+    font-style: italic;
+    }
+    
+    .detail {
+    @include font-size(0.875rem);
+    line-height: 20px;
+    }
+    
+    .detail-bold {
+    @include font-size(0.875rem);
+    line-height: 20px;
+    font-weight: 700;
+    }
 

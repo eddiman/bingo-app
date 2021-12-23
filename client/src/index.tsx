@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ThemeProvider, { ThemeContext } from "./components/ThemeProvider";
+import { piresDarkTheme, piresLightTheme } from './components/theme';
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider initialTheme={piresLightTheme}>
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

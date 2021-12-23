@@ -1,16 +1,15 @@
-import React from 'react';
+import React, { Children } from 'react';
 import { Link } from 'react-router-dom';
-import { styled } from '../components/theme';
+import { styled } from './theme';
 
 
-interface StyledTabProps {
+interface StyledButtonProps {
     readonly state: {
-        isActive: boolean,
         isDisabled: boolean
     };
 }
 
-const TabButtonStyled = styled(Link) <StyledTabProps>`
+const ButtonStyled = styled.button <StyledButtonProps>`
 background-color: ${(props) => props.theme.interactive.primary.default};
 color: ${(props) => props.theme.interactive.primary.defaultText};
 min-width: 8rem;
@@ -25,6 +24,7 @@ border-right: 1px solid ${(props) => props.theme.interactive.primary.activeText}
 border-bottom: 1px solid ${(props) => props.theme.interactive.primary.activeText};
 transition: background-color .2s ease-in-out, color .2s ease-in-out, border .1s ease-in-out;
 z-index:1;
+cursor: pointer;
 
 &:after {
     transition: background-color .25s ease-in-out, height .2s ease-in-out;
@@ -50,21 +50,6 @@ z-index:1;
 
 
 
-${(props) => props.state.isActive ? `
-background-color: ${props.theme.interactive.primary.active};
-color: ${props.theme.interactive.primary.activeText};
-border-bottom: 1px solid ${ props.theme.interactive.primary.active};
-&:after {
-    height:0;
-}
-
-&:hover {
-
-    &:after {
-      height:calc(100% +1px);
-    } 
-` : ""}
-
 &:active {
     &:after { 
     background-color: #5f5f5f;
@@ -88,20 +73,24 @@ cursor: default;
 `;
 
 
-type TabProps = {
-    label: string,
-    route: string,
-    isActiveTab: boolean,
-    disabled: boolean
-    onClick: () => void
+type ButtonProps = {
+
+    onClick: () => void,
+    disabled: boolean,
+    children: React.ReactNode
+
 
 }
-const TabButton = ({ label, route, isActiveTab, disabled, onClick }: TabProps): JSX.Element =>
-    <TabButtonStyled state={{ isActive: isActiveTab, isDisabled: disabled }} to={disabled ? "#" : route}
-     onClick={disabled ? () => { } : onClick}>
-        {label}
-    </TabButtonStyled>;
+const Button = ({ disabled, onClick, children }: ButtonProps): JSX.Element => {
+
+    return (
+
+        <ButtonStyled state={{ isDisabled: disabled }} onClick={disabled ? () => { } : onClick}>
+            {children}
+        </ButtonStyled>
+    )
+}
 
 
 
-export default TabButton;
+export default Button;

@@ -1,22 +1,53 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.scss';
 import DashboardContainer from './containers/DashboardContainer'
 import AgeGroupContainer from './containers/AgeGroupContainer'
-import styled from 'styled-components';
-import { IPage } from './interfaces/Interfaces';
+import { ThemeContext } from "./components/ThemeProvider";
+import { IPage, ITheme } from './interfaces/Interfaces';
 import {
   BrowserRouter,
   Route,
   Link,
-  Routes
+  Routes,
+  useLocation,
+  useParams
 } from "react-router-dom";
 import TabButton from './components/TabButton';
+import { piresDarkTheme, piresLightTheme, styled } from './components/theme';
+import { Decoration } from './components/Decoration';
+import tokens from './tokens/baseTokens';
+import Button from './components/Button';
+import { SectionContainer } from './components/SectionContainer';
+
+const Container = styled.div`
+background-color: ${(props) => props.theme.background};
+color: ${(props) => props.theme.text};
+padding: 2rem;
+display:flex;
+min-height:93vh; /*WOO OMAGCIS NUMABAR*/
+flex-direction: column;
+transition: background-color .2s ease-in-out, color .2s ease-in-out;
+tspan {
+  fill: ${(props) => props.theme.text};
+  @media ${tokens.constants.device.tablet} {
+    font-size: 0.75rem;
+  
+  
+      }
+}
+`;
+const ScreenContainer = styled.div`
+max-width: 1200px;
+margin: 0 auto;
+width:100%;
+
+`;
 
 const OuterContainer = styled.div`
-max-width: 1200px;
-margin:2rem auto 2rem auto;
-border:black 1px solid;
+border:1px solid ${(props) => props.theme.text};
+position: relative;
+
 .color-bar {
   width:100%;
   height: .5rem;
@@ -29,29 +60,29 @@ border:black 1px solid;
 
   }
   .color-1 {
-    background-color: #49d08a;
+    background-color: ${(props) => props.theme.miscColors.color1};
     flex:1;
     animation: anim1 30s infinite ease-in-out;
   }
   .color-2 {
-    background-color: #4466cd;
+    background-color: ${(props) => props.theme.miscColors.color2};
     flex:2;
     animation: anim2 22s infinite ease-in-out;
     
   }
   .color-3 {
-    background-color: #ff9555;
+    background-color: ${(props) => props.theme.miscColors.color3};
     flex:3;
 
   }
   .color-4 {
-    background-color: #ffbe4f;
+    background-color: ${(props) => props.theme.miscColors.color4};
     flex:4;
     animation: anim2 26s infinite ease-in-out;
     
   }
   .color-5 {
-    background-color: #68519e;
+    background-color: ${(props) => props.theme.miscColors.color5};
     flex:5;
   }
 
@@ -72,77 +103,161 @@ border:black 1px solid;
   }
 }
 `;
-
 const MainContainer = styled.div`
 `;
 
 const Header = styled.header`
-padding 1rem 0 0; 
 display:flex;
-flex-direction  : column;
-border-bottom: 1px solid black;
-padding: 1rem 1rem 0 1rem;
+flex-direction: column;
+border-bottom: 1px solid ${(props) => props.theme.text};
+padding: 1.5rem 1.5rem 0 1.5rem;
+    
+@media ${tokens.constants.device.tablet} {
+  padding: 1rem 1rem 0 1rem;
+    }
+
 `;
 
 const TabNavGroupStyled = styled.nav`
 display:flex;
+position: relative;
+overflow-x: scroll;
+top:1px;
+&::-webkit-scrollbar {
+  display: none;
+}
 
 a:first-child {
   margin: 0 .125rem 0 0;
 }
+/*
+&:after {
+  content:'';
+  position: fixed;
+  right:3rem;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, ${(props) => props.theme.background} 100%);
+  height:2.75rem;
+  width:4rem;
+  color: black;
+  z-index: 2;
+  
+}
+*/
+@media ${tokens.constants.device.tablet} {
+  }
 `;
+
 
 
 const pages: IPage[] = [
   {
-  name: "Overview",
-  slug: ""
-},
-{
-  name : "Aldersgrupper",
-  slug : "agegroup"
-}];
-
+    name: "Overview",
+    slug: "",
+    disabled: false
+  },
+  {
+    name: "Aldersgrupper",
+    slug: "agegroup",
+    disabled: false
+  },
+  {
+    name: "Utdanning",
+    slug: "education",
+    disabled: true
+  },
+  {
+    name: "Jobberfaring",
+    slug: "experience",
+    disabled: true
+  }
+];
 
 function App() {
-  const [active, setActive] = useState(pages[0].slug);
-  const [currentPage, seturrentPage] = useState(pages[0]);
 
-  const tabGroup = (group: string) => {
-    setActive(group)
+  const [active, setActive] = useState(window.location.pathname.substring(1));
+  const { setMainTheme } = useContext(ThemeContext)
+  const setLocalStorageTheme = (themeString: string) => {
+    window.localStorage.setItem('theme', themeString)
+  };
+  const getLocalStorageTheme = () => {
+    return window.localStorage.getItem('theme')
+  };
+  const [currentTheme, setCurrentTheme] = useState(getLocalStorageTheme());
 
-    console.log(active, currentPage);
+  useEffect(() => {
+    const localTheme = window.localStorage.getItem('theme');
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && !localTheme) {
+      setAppTheme("piresDarkTheme");
+    }
+  }, []);
 
+  const setAppTheme = (themeName: string) => {
+    switch (themeName) {
+      case "piresLightTheme":
+        setMainTheme(piresLightTheme);
+        setLocalStorageTheme('piresLightTheme')
+        break;
+      case "piresDarkTheme":
+        setMainTheme(piresDarkTheme);
+        setLocalStorageTheme('piresDarkTheme')
+        break;
+    }
+  };
+
+  const toggleAppTheme = () => {
+    if (getLocalStorageTheme() === "piresDarkTheme") {
+      setAppTheme("piresLightTheme");
+    } else {
+      setAppTheme("piresDarkTheme");
+    }
   }
+
+
   return (
     <BrowserRouter>
-      <OuterContainer>
-        <div className="color-bar">
-          <div className='color-1' />
-          <div className='color-2' />
-          <div className='color-3' />
-          <div className='color-4' />
-          <div className='color-5' />
-        </div>
-        <MainContainer>
-          <Header>
-            <h1>title</h1>
-            <TabNavGroupStyled>
-              {pages.map((page, index) => {
-                return(
-                <TabButton route={'/' + page.slug} key={index}label={page.name} active={active === page.slug} onClick={() => setActive(page.slug)} />
-              )})}
+      <Container>
+        <ScreenContainer>
+          <OuterContainer>
+            <div className="color-bar">
+              <div className='color-1' />
+              <div className='color-2' />
+              <div className='color-3' />
+              <div className='color-4' />
+              <div className='color-5' />
+            </div>
+            <Decoration state={{ alignPos: "top-left", size: 10 }} />
+            <Decoration state={{ alignPos: "top-right", size: 10 }} />
+            <Decoration state={{ alignPos: "bottom-left", size: 10 }} />
+            <Decoration state={{ alignPos: "bottom-right", size: 10 }} />
+            <MainContainer>
+              <Header>
+                <h1>Lønnsstatistikk for utviklere 2021</h1>
+                <TabNavGroupStyled>
+                  {pages.map((page, index) => {
+                    return (
+                      <TabButton route={'/' + page.slug} key={index} label={page.name} disabled={page.disabled} isActiveTab={active === page.slug} onClick={() => setActive(page.slug)} />
+                    )
+                  })}
 
-            </TabNavGroupStyled>
-          </Header>
+                </TabNavGroupStyled>
+              </Header>
 
-          <Routes>
-            <Route path="/" element={<DashboardContainer />} />
-            <Route path="/agegroup" element={<AgeGroupContainer />} />
+              <Routes>
+                <Route path="/" element={<DashboardContainer />} />
+                <Route path="/agegroup" element={<AgeGroupContainer />} />
 
-          </Routes>
-        </MainContainer>
-      </OuterContainer>
+              </Routes>
+            </MainContainer>
+          </OuterContainer>
+        </ScreenContainer>
+        <SectionContainer state={{marginAuto : true}}>
+          <div>
+
+            <Button disabled={false} onClick={() => toggleAppTheme()}>Toggle theme</Button>
+          </div>
+        </SectionContainer>
+      </Container>
+
     </BrowserRouter>
   );
 }
