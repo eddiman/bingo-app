@@ -15,12 +15,16 @@ h1, h2, h3, h4 {
   margin: 0;
   letter-spacing: 1.5px;
 }
+ul {
+  margin: 0;
+  padding: 0;
+}
 
 h1 {
   margin: 0 0 1rem 0;
 }
 
-p, span, a, tspan, button {
+p, span, a, tspan, button, li {
   font-family: 'Oswald', sans-serif;
   letter-spacing: 0.5px;
 }

@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.scss';
 import DashboardContainer from './containers/DashboardContainer'
-import AgeGroupContainer from './containers/AgeGroupContainer'
 import { ThemeContext } from "./components/ThemeProvider";
 import { IPage, ITheme } from './interfaces/Interfaces';
 import {
@@ -186,13 +185,18 @@ function App() {
 
   useEffect(() => {
     const localTheme = window.localStorage.getItem('theme');
+    console.log(localTheme);
+    
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && !localTheme) {
       setAppTheme("piresDarkTheme");
+    } else {
+      setAppTheme(localTheme ? localTheme : "piresLightTheme");
     }
   }, []);
 
   const setAppTheme = (themeName: string) => {
     switch (themeName) {
+
       case "piresLightTheme":
         setMainTheme(piresLightTheme);
         setLocalStorageTheme('piresLightTheme')
@@ -231,20 +235,11 @@ function App() {
             <Decoration state={{ alignPos: "bottom-right", size: 10 }} />
             <MainContainer>
               <Header>
-                <h1>Lønnsstatistikk for utviklere 2021</h1>
-                <TabNavGroupStyled>
-                  {pages.map((page, index) => {
-                    return (
-                      <TabButton route={'/' + page.slug} key={index} label={page.name} disabled={page.disabled} isActiveTab={active === page.slug} onClick={() => setActive(page.slug)} />
-                    )
-                  })}
-
-                </TabNavGroupStyled>
+                <h1>Bingo</h1>
               </Header>
 
               <Routes>
                 <Route path="/" element={<DashboardContainer />} />
-                <Route path="/agegroup" element={<AgeGroupContainer />} />
 
               </Routes>
             </MainContainer>

@@ -23,7 +23,8 @@ export const tokens = {
         background: colors.common.black["30"],
         bodyText: colors.common.black["180"]
       }
-    }
+    },
+    alphaBackground: colors.common.black["opacity30"]
   },
   interactive: {
     focusOutline: {

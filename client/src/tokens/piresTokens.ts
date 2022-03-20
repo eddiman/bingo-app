@@ -12,7 +12,7 @@ const piresTokens = {
         activeText: colors.common.black["30"],
         disabled: colors.common.black["180"],
         disabledText: colors.common.black["130"],
-        focus: colors.common.black["100"],
+        focus: colors.common.blue["100"],
         label: colors.common.white["100"],
         border: colors.common.black["180"]
       },
@@ -34,9 +34,9 @@ const piresTokens = {
         hoverText: colors.common.black["80"],
         active: colors.common.black["30"],
         activeText: colors.common.black["180"],
-        disabled: colors.common.black["180"],
+        disabled: colors.common.black["30"],
         disabledText: colors.common.black["130"],
-        focus: colors.common.black["100"],
+        focus: colors.common.blue["100"],
         label: colors.common.black["180"],
         border: colors.common.black["80"]
       },

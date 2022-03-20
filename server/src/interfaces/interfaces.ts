@@ -1,5 +1,5 @@
 
-interface IPerson {
+export interface IPerson {
     age: number,
     county: string,
     jobRole : string,
@@ -9,11 +9,39 @@ interface IPerson {
     salary: number,
     unionOrganized: boolean 
 }
+export interface IToken {
+    idToken:string
+  }
 
 
+export interface ILottery {
+    fields : {
+        name : string,
+        description : string,
+        dateTime : {
+            timestampValue : string
+        },
+        participants : {
+            arrayValue : {
+            values : 
+               IParticipant[]
 
+           }
+        }
+    }
+}
 
-interface IAgeAverage
+export interface IParticipant {
+    mapValue: {
+        fields: {
+            name: {
+                stringValue: string
+            }
+        }
+    }
+}
+
+export interface IAgeAverage
  {
      groupName : string,
     avgSalary : number,

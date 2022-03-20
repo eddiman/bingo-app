@@ -12,6 +12,7 @@ export const piresLightTheme: ITheme = {
     },
     background: baseTokens.ui.background.light.background,
     text: baseTokens.ui.background.light.bodyText,
+    alphaBackground: baseTokens.ui.alphaBackground,
 
     interactive: {
         primary: {
@@ -53,6 +54,7 @@ export const piresDarkTheme: ITheme = {
     },
     background: baseTokens.ui.background.dark.background,
     text: baseTokens.ui.background.dark.bodyText,
+    alphaBackground: baseTokens.ui.alphaBackground,
 
     interactive: {
         primary: {

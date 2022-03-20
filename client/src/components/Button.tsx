@@ -25,6 +25,7 @@ border-bottom: 1px solid ${(props) => props.theme.interactive.primary.activeText
 transition: background-color .2s ease-in-out, color .2s ease-in-out, border .1s ease-in-out;
 z-index:1;
 cursor: pointer;
+outline-color: ${(props) => props.theme.focus.default};
 
 &:after {
     transition: background-color .25s ease-in-out, height .2s ease-in-out;
@@ -74,12 +75,9 @@ cursor: default;
 
 
 type ButtonProps = {
-
     onClick: () => void,
     disabled: boolean,
     children: React.ReactNode
-
-
 }
 const Button = ({ disabled, onClick, children }: ButtonProps): JSX.Element => {
 

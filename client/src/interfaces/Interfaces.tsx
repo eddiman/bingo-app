@@ -3,7 +3,10 @@ export interface IPage {
   slug: string,
   disabled: boolean
 }
-
+export interface IBingoWord {
+  word:string,
+  isUsed:boolean
+}
 
 export interface IAgeGroupAvg {
   groupName: string,
@@ -53,6 +56,7 @@ export interface ITheme {
     default: string;
   };
   background: string;
+  alphaBackground: string;
   text: string,
   interactive: {
     primary: {
