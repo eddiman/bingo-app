@@ -13,7 +13,7 @@ import {
   useParams
 } from "react-router-dom";
 import TabButton from './components/TabButton';
-import { piresDarkTheme, piresLightTheme, styled } from './components/theme';
+import { otDarkTheme, otLightTheme, piresDarkTheme, piresLightTheme, styled } from './components/theme';
 import { Decoration } from './components/Decoration';
 import tokens from './tokens/baseTokens';
 import Button from './components/Button';
@@ -24,7 +24,7 @@ background-color: ${(props) => props.theme.background};
 color: ${(props) => props.theme.text};
 padding: 2rem;
 display:flex;
-min-height:93vh; /*WOO OMAGCIS NUMABAR*/
+min-height:99vh; /*WOO OMAGCIS NUMABAR*/
 flex-direction: column;
 transition: background-color .2s ease-in-out, color .2s ease-in-out;
 @media ${tokens.constants.device.tablet} {
@@ -169,31 +169,31 @@ function App() {
     console.log(localTheme);
     
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && !localTheme) {
-      setAppTheme("piresDarkTheme");
+      setAppTheme("otDarkTheme");
     } else {
-      setAppTheme(localTheme ? localTheme : "piresLightTheme");
+      setAppTheme(localTheme ? localTheme : "otLightTheme");
     }
   }, []);
 
   const setAppTheme = (themeName: string) => {
     switch (themeName) {
 
-      case "piresLightTheme":
-        setMainTheme(piresLightTheme);
-        setLocalStorageTheme('piresLightTheme')
+      case "otLightTheme":
+        setMainTheme(otLightTheme);
+        setLocalStorageTheme('otLightTheme')
         break;
-      case "piresDarkTheme":
-        setMainTheme(piresDarkTheme);
-        setLocalStorageTheme('piresDarkTheme')
+      case "otDarkTheme":
+        setMainTheme(otDarkTheme);
+        setLocalStorageTheme('otDarkTheme')
         break;
     }
   };
 
   const toggleAppTheme = () => {
-    if (getLocalStorageTheme() === "piresDarkTheme") {
-      setAppTheme("piresLightTheme");
+    if (getLocalStorageTheme() === "otDarkTheme") {
+      setAppTheme("otLightTheme");
     } else {
-      setAppTheme("piresDarkTheme");
+      setAppTheme("otDarkTheme");
     }
   }
 

@@ -20,10 +20,12 @@ padding:.5rem;
 transition: background-color .1s ease-in-out;
 outline-color: ${(props) => props.theme.focus.default};
 
+
+@media only screen and ( min-width: ${tokens.constants.device.tablet}) {
 &:hover {
     background-color: ${(props) => props.theme.interactive.primary.border};
     color: ${(props) => props.theme.interactive.primary.defaultText};
-}
+}}
 
 * {
     margin: 0;

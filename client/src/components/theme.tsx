@@ -2,6 +2,7 @@ import { ITheme } from "../interfaces/Interfaces";
 import baseTokens from "../tokens/baseTokens";
 import piresTokens from "../tokens/piresTokens";
 import baseStyled, { ThemedStyledInterface } from 'styled-components';
+import otTokens from "../tokens/otTokens";
 
 export const piresLightTheme: ITheme = {
     link: {
@@ -84,6 +85,89 @@ export const piresDarkTheme: ITheme = {
         color3: piresTokens.miscColors.color3,
         color4: piresTokens.miscColors.color4,
         color5: piresTokens.miscColors.color5,
+    }
+};
+
+export const otLightTheme: ITheme = {
+    link: {
+        default: baseTokens.interactive.link.light.default
+    },
+    focus: {
+        default: baseTokens.interactive.focusOutline.light.default
+    },
+    background: baseTokens.ui.background.light.background,
+    text: baseTokens.ui.background.light.bodyText,
+    alphaBackground: baseTokens.ui.alphaBackground,
+
+    interactive: {
+        primary: {
+            default: otTokens.light.interactive.primary.default,
+            defaultText: otTokens.light.interactive.primary.defaultText,
+            hover: otTokens.light.interactive.primary.hover,
+            hoverText: otTokens.light.interactive.primary.hoverText,
+            active: otTokens.light.interactive.primary.active,
+            activeText: otTokens.light.interactive.primary.activeText,
+            disabled: otTokens.light.interactive.primary.disabled,
+            disabledText: otTokens.light.interactive.primary.disabledText,
+            focus: otTokens.light.interactive.primary.focus,
+            label: otTokens.light.interactive.primary.label,
+            border: otTokens.light.interactive.primary.border
+        },
+        secondary: {
+            default: otTokens.light.interactive.secondary.default,
+            hover: otTokens.light.interactive.secondary.hover,
+            active: otTokens.light.interactive.secondary.active,
+            focus: otTokens.light.interactive.secondary.focus,
+            label: otTokens.light.interactive.secondary.label
+        }
+    },
+    miscColors: {
+        color1: otTokens.miscColors.color1,
+        color2: otTokens.miscColors.color2,
+        color3: otTokens.miscColors.color3,
+        color4: otTokens.miscColors.color4,
+        color5: otTokens.miscColors.color5,
+    }
+};
+export const otDarkTheme: ITheme = {
+    link: {
+        default: baseTokens.interactive.link.dark.default
+    },
+    focus: {
+        default: baseTokens.interactive.focusOutline.dark.default
+    },
+    background: baseTokens.ui.background.dark.background,
+    text: baseTokens.ui.background.dark.bodyText,
+    alphaBackground: baseTokens.ui.alphaBackground,
+
+    interactive: {
+        primary: {
+            default: otTokens.dark.interactive.primary.default,
+            defaultText: otTokens.dark.interactive.primary.defaultText,
+            hover: otTokens.dark.interactive.primary.hover,
+            hoverText: otTokens.dark.interactive.primary.hoverText,
+            active: otTokens.dark.interactive.primary.active,
+            activeText: otTokens.dark.interactive.primary.activeText,
+            disabled: otTokens.dark.interactive.primary.disabled,
+            disabledText: otTokens.dark.interactive.primary.disabledText,
+            focus: otTokens.dark.interactive.primary.focus,
+            label: otTokens.dark.interactive.primary.label,
+            border: otTokens.dark.interactive.primary.border
+        },
+        secondary: {
+            default: otTokens.dark.interactive.secondary.default,
+            hover: otTokens.dark.interactive.secondary.hover,
+            active: otTokens.dark.interactive.secondary.active,
+            focus: otTokens.dark.interactive.secondary.focus,
+            label: otTokens.dark.interactive.secondary.label
+        }
+    },
+    miscColors: {
+        color1: otTokens.miscColors.color1,
+        color2: otTokens.miscColors.color2,
+        color3: otTokens.miscColors.color3,
+        color4: otTokens.miscColors.color4,
+        color5: otTokens.miscColors.color5,
     }
 };
 
