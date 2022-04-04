@@ -1,3 +1,4 @@
+import tokens from "../tokens/baseTokens";
 import { styled } from "./theme";
 interface StyledDecoratorProps {
     readonly state: {
@@ -7,8 +8,13 @@ interface StyledDecoratorProps {
   }
   //Used for those little rectangles on each corner, must be inserted in to a 'position: relative' container
 export const Decoration = styled.div<StyledDecoratorProps>`
+@media ${tokens.constants.device.mobileL} { 
+   height:${(props) =>props.state.size/1.25}px;
+   width: ${(props) =>props.state.size/1.25}px;
+}
   height:${(props) =>props.state.size}px;
   width: ${(props) =>props.state.size}px;
+  
   position: absolute;
   background-color: ${(props) => props.theme.text};
   ${(props) => handleAlignment(props.state.alignPos, props.state.size) }

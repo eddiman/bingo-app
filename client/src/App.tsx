@@ -27,11 +27,14 @@ display:flex;
 min-height:93vh; /*WOO OMAGCIS NUMABAR*/
 flex-direction: column;
 transition: background-color .2s ease-in-out, color .2s ease-in-out;
+@media ${tokens.constants.device.tablet} {
+  padding: 1rem;
+}
 tspan {
   fill: ${(props) => props.theme.text};
   @media ${tokens.constants.device.tablet} {
     font-size: 0.75rem;
-  
+    padding: 1rem;
   
       }
 }
@@ -110,6 +113,7 @@ display:flex;
 flex-direction: column;
 border-bottom: 1px solid ${(props) => props.theme.text};
 padding: 1.5rem 1.5rem 0 1.5rem;
+
     
 @media ${tokens.constants.device.tablet} {
   padding: 1rem 1rem 0 1rem;
@@ -147,29 +151,6 @@ a:first-child {
 `;
 
 
-
-const pages: IPage[] = [
-  {
-    name: "Overview",
-    slug: "",
-    disabled: false
-  },
-  {
-    name: "Aldersgrupper",
-    slug: "agegroup",
-    disabled: false
-  },
-  {
-    name: "Utdanning",
-    slug: "education",
-    disabled: true
-  },
-  {
-    name: "Jobberfaring",
-    slug: "experience",
-    disabled: true
-  }
-];
 
 function App() {
 

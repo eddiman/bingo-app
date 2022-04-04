@@ -7,6 +7,8 @@ import { styled } from '../components/theme';
 import useFetch from '../hooks/useFetch';
 import { IAgeGroupAvg, IBingoWord, ITheme } from '../interfaces/Interfaces';
 import { DecoratedContainer } from '../components/DecoratedContainer';
+import Button from '../components/Button';
+import tokens from '../tokens/baseTokens';
 
 const ModalContainer = styled.div`
 position: fixed;  
@@ -25,6 +27,31 @@ const WordSelectionContainer = styled.div`
   display:flex;
   flex-direction:column;
   margin-left: .5rem;
+}
+
+`;
+interface MobileWrapperProps {
+  readonly state: {
+      isWordSelectionContainerOpen : boolean
+
+  };
+}
+const MobileWrapper = styled.div <MobileWrapperProps>`
+
+
+@media ${tokens.constants.device.tablet} {
+position: fixed;
+left: 1rem;
+right: 1rem;
+z-index: 999;
+bottom: -61%;
+
+transition: .4s ease-in-out bottom;
+
+${(props) => props.state.isWordSelectionContainerOpen ? `
+bottom: 0%;
+
+` : ""
 }
 
 `;
@@ -125,21 +152,24 @@ const GridWrapper = styled.div<GridProps>`
 display: grid;
 margin: 0 auto;
 grid-gap: 8px;
-grid-template-columns: repeat(${(props) => props.state?.gridSize ? props.state.gridSize : 5} , 100px);
-grid-template-rows: repeat(${(props) => props.state?.gridSize ? props.state.gridSize : 5} , 100px);
+grid-template-columns: repeat(${(props) => props.state?.gridSize ? props.state.gridSize : 5} , minmax(50px, .75fr));
+grid-template-rows: repeat(${(props) => props.state?.gridSize ? props.state.gridSize : 5} , minmax(50px, .75fr));
 grid-auto-flow: row;
 `;
 
 const DashboardContainer: React.FC = (() => {
   const theme = useContext(ThemeContext).theme as ITheme;
 
-  const url = "http://localhost:3001/token?id="
+  const url = "https://pires-bingo-app-server.herokuapp.com/token?id="
+  const localUrl = "http://localhost:3001/token?id="
   const [searchParams, setSearchParams] = useSearchParams();
   const lotteryId = searchParams.get("id")
 
   const [boardSize, setBoardSize] = useState(5);
   const [isWordModalShowing, setIsWordModalShowing] = useState(false);
   const [isGameMode, setIsGameMode] = useState(false);
+
+  const [isWordSelectionContainerOpen, setIsWordSelectionContainerOpen] = useState(false);
   const [isSelectingWord, setIsSelectingWord] = useState(false)
   const [bingoWordsOnBoard, setBingoWordsOnBoard] = useState<IBingoWord[]>([]);
   const [bingoWords, setBingoWords] = useState<IBingoWord[]>();
@@ -170,6 +200,7 @@ const DashboardContainer: React.FC = (() => {
   }
 
   function elementClicked(wordObj: IBingoWord) {
+    setIsWordSelectionContainerOpen(false)
     setCurrentlySelectedWord(wordObj)
     setIsSelectingWord(true)
 
@@ -181,9 +212,14 @@ const DashboardContainer: React.FC = (() => {
     setCurrentlySelectedWordBoxString(word);
   }
 
+  function switchWordbox() {
+
+  }
+
   function setWordInBox(boxWord: string, bingoWordIndex: number) {
     let newBingoWords = bingoWords;
     let newBingoWordsOnBoardArray = bingoWordsOnBoard;
+    setIsWordSelectionContainerOpen(true)
 
     if (bingoWords && newBingoWords) {
       console.log(isSelectingWord);
@@ -231,34 +267,43 @@ const DashboardContainer: React.FC = (() => {
         <ModalContainer onClick={() => { toggleModal() }}>
 
         </ModalContainer> : ""}
-
+      <Button onClick={() => { setIsGameMode(!isGameMode) }} disabled={false} children={isGameMode ? "Game on" : "Select the words"}></Button>
       <SectionContainer state={{ direction: "row", wrap: "flex-wrap", childrenFlex: 1 }}>
         <GridWrapper state={{ gridSize: boardSize }}>
           {bingoWordsOnBoard.map((x, i) =>
-            <WordBox key={i} onClick={() => { setWordInBox(currentlySelectedWord ? currentlySelectedWord.word : "", i) }} word={currentlySelectedWord ? currentlySelectedWord.word : ""} />
+            <WordBox key={i} isGame={isGameMode} onClick={() => {
+              isGameMode ? switchWordbox() :
+              
+                setWordInBox(currentlySelectedWord ? currentlySelectedWord.word : "", i)
+            }} word={currentlySelectedWord ? currentlySelectedWord.word : ""
+
+            } />
           )}
         </GridWrapper>
+        <MobileWrapper state= {{isWordSelectionContainerOpen: isWordSelectionContainerOpen}}className='test'>
+          <WordSelectionContainer >
+            <DecoratedContainer >
+            <Button onClick={() => setIsWordSelectionContainerOpen(!isWordSelectionContainerOpen)} disabled={false} children={"open"}></Button>
+            <span>Valgt ord: {currentlySelectedWord?.word}</span>
+              <WordSelectionModalListContainer>
+                <WordSelectionModalList className={"inner-list"}>
+                  <div>
 
-        <WordSelectionContainer >
-          <DecoratedContainer >
-            <WordSelectionModalListContainer>
-              <WordSelectionModalList className={"inner-list"}>
-                <div> 
-                <span>Valgt ord: {currentlySelectedWord?.word}</span>
+                  </div>
 
-                </div>
+                  {bingoWords?.map((wordObj: IBingoWord, i: number) => {
+                    return (
+                      <WordSelectionModalElement key={i} state={{ isUsed: wordObj.isUsed }} disabled={wordObj.isUsed} onClick={!wordObj.isUsed ? () => { elementClicked(wordObj) } : () => { }}>
+                        {wordObj.word}
+                      </WordSelectionModalElement>
+                    )
+                  })}
+                </WordSelectionModalList>
+              </WordSelectionModalListContainer>
+            </DecoratedContainer>
+          </WordSelectionContainer>
+        </MobileWrapper>
 
-                {bingoWords?.map((wordObj: IBingoWord, i: number) => {
-                  return (
-                    <WordSelectionModalElement key={i} state={{ isUsed: wordObj.isUsed }} disabled={wordObj.isUsed} onClick={!wordObj.isUsed ? () => { elementClicked(wordObj) } : () => { }}>
-                      {wordObj.word}
-                    </WordSelectionModalElement>
-                  )
-                })}
-              </WordSelectionModalList>
-            </WordSelectionModalListContainer>
-          </DecoratedContainer>
-        </WordSelectionContainer>
       </SectionContainer>
     </>
   )
