@@ -23,19 +23,43 @@ align-items: center;
 `;
 const WordSelectionContainer = styled.div`
 > * {
-  height:600px;
+  height: 600px;
   display:flex;
   flex-direction:column;
-  margin-left: .5rem;
+ .top-header {
+   display: flex; 
+   flex-direction: row;
+ }
 }
 
 `;
 interface MobileWrapperProps {
   readonly state: {
-      isWordSelectionContainerOpen : boolean
+    isWordSelectionContainerOpen: boolean
+    isGameMode: boolean
 
   };
 }
+interface CardSheetProps {
+  readonly state: {
+    isWordSelectionContainerOpen: boolean
+
+  };
+}
+
+
+
+const MobileWrapperBg = styled.div`
+position: fixed;
+top:0;
+bottom:0;
+left:0;
+right:0;
+background-color:black;
+opacity: 0.5;
+z-index: 998;
+animation: fadein ease-in-out .2s;
+`;
 const MobileWrapper = styled.div <MobileWrapperProps>`
 
 
@@ -44,15 +68,18 @@ position: fixed;
 left: 1rem;
 right: 1rem;
 z-index: 999;
-bottom: -61%;
+top: calc(100% - 100px);
 
-transition: .4s ease-in-out bottom;
+transition: .2s ease-in-out top;
 
 ${(props) => props.state.isWordSelectionContainerOpen ? `
-bottom: 0%;
-
+top: calc(100% - 50%);
 ` : ""
-}
+  }
+${(props) => props.state.isGameMode ? `
+top: 110vh;
+` : ""
+  }
 
 `;
 const WordSelectionModalListContainer = styled.div`
@@ -110,6 +137,15 @@ interface WordSelectionModalElementProps {
 
   };
 }
+const CardSheetButton = styled.button <CardSheetProps>`
+width: 100%;
+text-align: left;
+background-color: unset;
+color: ${(props) => props.theme.text};
+border: 0;
+height: 4rem;
+`
+
 const WordSelectionModalElement = styled.button<WordSelectionModalElementProps>`
 margin: .125rem 0;
 padding: .25rem .5rem;
@@ -176,7 +212,11 @@ const DashboardContainer: React.FC = (() => {
 
   const [currentlySelectedWord, setCurrentlySelectedWord] = useState<IBingoWord>();
   const [currentlySelectedWordBoxString, setCurrentlySelectedWordBoxString] = useState<string>();
-  const { data, error } = useFetch<IBingoWord[]>(url + lotteryId);
+  const { data, error } = useFetch<IBingoWord[]>(url + lotteryId, {
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    }
+  });
 
   useEffect(() => {
 
@@ -273,24 +313,24 @@ const DashboardContainer: React.FC = (() => {
           {bingoWordsOnBoard.map((x, i) =>
             <WordBox key={i} isGame={isGameMode} onClick={() => {
               isGameMode ? switchWordbox() :
-              
+
                 setWordInBox(currentlySelectedWord ? currentlySelectedWord.word : "", i)
             }} word={currentlySelectedWord ? currentlySelectedWord.word : ""
 
             } />
           )}
         </GridWrapper>
-        <MobileWrapper state= {{isWordSelectionContainerOpen: isWordSelectionContainerOpen}}className='test'>
+        {isWordSelectionContainerOpen ? <MobileWrapperBg /> : ""}
+        <MobileWrapper state={{ isWordSelectionContainerOpen: isWordSelectionContainerOpen, isGameMode: isGameMode }} className='test'>
           <WordSelectionContainer >
             <DecoratedContainer >
-            <Button onClick={() => setIsWordSelectionContainerOpen(!isWordSelectionContainerOpen)} disabled={false} children={"open"}></Button>
-            <span>Valgt ord: {currentlySelectedWord?.word}</span>
+              <div className='top-header'>
+                <CardSheetButton onClick={() => setIsWordSelectionContainerOpen(!isWordSelectionContainerOpen)} 
+                state={{ isWordSelectionContainerOpen: isWordSelectionContainerOpen }}
+                disabled={false} children={"Valgt ord:"  + (currentlySelectedWord ? currentlySelectedWord?.word : "")}></CardSheetButton>
+              </div>
               <WordSelectionModalListContainer>
                 <WordSelectionModalList className={"inner-list"}>
-                  <div>
-
-                  </div>
-
                   {bingoWords?.map((wordObj: IBingoWord, i: number) => {
                     return (
                       <WordSelectionModalElement key={i} state={{ isUsed: wordObj.isUsed }} disabled={wordObj.isUsed} onClick={!wordObj.isUsed ? () => { elementClicked(wordObj) } : () => { }}>

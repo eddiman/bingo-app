@@ -39,7 +39,7 @@ p {
 }
 
 ${(props) => props.state.isSelected ? `
-background-color: ${props.theme.miscColors.color1};
+background-color: ${props.theme.miscColors.color4};
  span {
     filter: invert(1);
  }
