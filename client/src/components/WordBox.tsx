@@ -1,3 +1,4 @@
+import { prependOnceListener } from "process";
 import { Children, useState } from "react";
 import tokens from "../tokens/baseTokens";
 import { Decoration } from "./Decoration";
@@ -7,6 +8,7 @@ interface StyledWordBoxProps {
     readonly state: {
         isSelected : boolean
         isGame : boolean,
+        isPrefilled : boolean
     };
 }
 
@@ -20,31 +22,19 @@ padding:.5rem;
 transition: background-color .1s ease-in-out;
 outline-color: ${(props) => props.theme.focus.default};
 word-break: break-word;
-&:hover {
-    background-color: ${(props) => props.theme.interactive.primary.border};
-    color: ${(props) => props.theme.interactive.primary.defaultText};
-    } 
+
 
 @media ${tokens.constants.device.tablet} {
-&:hover {
-    background-color: unset;
-    color: ${(props) => props.theme.interactive.primary.defaultText};
-
-    }  
     p {
         line-height:1rem;
         font-size: .75rem;
     } 
 }
 
-${(props) => props.state.isSelected? `
+${(props) => props.state.isSelected || props.state.isPrefilled ? `
 background-color: ${props.theme.miscColors.color4};
-&:hover {'
-    background-color:${props.theme.miscColors.color4};
-    }  
  p {
     color: white;
-
  }
 ` : ""}
 
@@ -59,27 +49,26 @@ interface LayoutProps {
     onClick: (s : string) => void,
     word: string,
     isGame : boolean,
+    index : number
  } 
 
 
- export const WordBox = ({ onClick, word, isGame, }: LayoutProps): JSX.Element => {
+ export const WordBox = ({ onClick, word, isGame, index }: LayoutProps): JSX.Element => {
      const [selectedWord, setSelectedWord] = useState("")
      const [isSelected, setIsSelected] = useState(false)
      const onClicked =( () => {
-        if(!isGame) {
-            let s : string = selectedWord;
-            console.log("ffff", selectedWord);
-            onClick(s);
+        if(!isGame && index !== 12) {
+            onClick(selectedWord);
             setSelectedWord(word)
-        }else {
-
+        }
+        else {
             setIsSelected(!isSelected)
         }
             
      })
 
     return (
-        <StyledWordBox state={{ isSelected: isSelected, isGame: isGame}} onClick={onClicked}>
+        <StyledWordBox state={{ isSelected: isSelected, isGame: isGame, isPrefilled : index == 12}} onClick={onClicked}>
             <Decoration state={{ alignPos: "top-left", size: 6 }} />
             <Decoration state={{ alignPos: "top-right", size: 6 }} />
             <Decoration state={{ alignPos: "bottom-left", size: 6 }} />

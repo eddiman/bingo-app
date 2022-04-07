@@ -370,13 +370,12 @@ const DashboardContainer: React.FC = (() => {
       <SectionContainer state={{ direction: "row", wrap: "flex-wrap", childrenFlex: 1 }}>
         <GridWrapper state={{ gridSize: boardSize }}>
           {bingoWordsOnBoard.map((x, i) => 
-            <WordBox key={i} isGame={isGameMode} onClick={() => {
+            <WordBox key={i} index={i} isGame={isGameMode} onClick={() => {
               isGameMode ? switchWordbox() :
                 setWordInBox(currentlySelectedWord ? currentlySelectedWord.word : "", i)
             }} word={currentlySelectedWord ? currentlySelectedWord.word : ""
 
             } />
-          
           )}
         </GridWrapper>
         {isWordSelectionContainerOpen ? <MobileWrapperBg onClick={() => { setIsWordSelectionContainerOpen(!isWordSelectionContainerOpen) }} /> : ""}
