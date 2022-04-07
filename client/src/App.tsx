@@ -24,7 +24,6 @@ background-color: ${(props) => props.theme.background};
 color: ${(props) => props.theme.text};
 padding: 2rem;
 display:flex;
-min-height:99vh; /*WOO OMAGCIS NUMABAR*/
 flex-direction: column;
 transition: background-color .2s ease-in-out, color .2s ease-in-out;
 @media ${tokens.constants.device.tablet} {
@@ -167,12 +166,16 @@ function App() {
   useEffect(() => {
     const localTheme = window.localStorage.getItem('theme');
     console.log(localTheme);
-    
+
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && !localTheme) {
       setAppTheme("otDarkTheme");
     } else {
       setAppTheme(localTheme ? localTheme : "otLightTheme");
     }
+    window.addEventListener("beforeunload", (ev) => {
+      ev.preventDefault();
+      return ev.returnValue = 'Are you sure you want to close?';
+    });
   }, []);
 
   const setAppTheme = (themeName: string) => {
@@ -226,11 +229,9 @@ function App() {
             </MainContainer>
           </OuterContainer>
         </ScreenContainer>
-        <SectionContainer state={{marginAuto : true}}>
-          <div>
-
+        <SectionContainer state={{ marginAuto: true }}>
             <Button disabled={false} onClick={() => toggleAppTheme()}>Toggle theme</Button>
-          </div>
+            
         </SectionContainer>
       </Container>
 

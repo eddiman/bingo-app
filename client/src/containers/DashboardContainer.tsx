@@ -61,14 +61,18 @@ z-index: 998;
 animation: fadein ease-in-out .2s;
 `;
 const MobileWrapper = styled.div <MobileWrapperProps>`
-
+transition: .2s opacity;
+${(props) => props.state.isGameMode ? `
+opacity: .5;
+` : ""
+  }
 
 @media ${tokens.constants.device.tablet} {
 position: fixed;
 left: 1rem;
 right: 1rem;
 z-index: 999;
-top: calc(100% - 100px);
+top: calc(100% - 80px);
 
 transition: .2s ease-in-out top;
 
@@ -79,6 +83,7 @@ top: calc(100% - 50%);
 ${(props) => props.state.isGameMode ? `
 top: 110vh;
 ` : ""
+  }
   }
 
 `;
@@ -134,16 +139,57 @@ div {
 interface WordSelectionModalElementProps {
   readonly state: {
     isUsed: boolean,
+    isDisabled: boolean,
 
   };
 }
 const CardSheetButton = styled.button <CardSheetProps>`
 width: 100%;
 text-align: left;
+padding: 0 1rem;
+margin-bottom: 1rem;
 background-color: unset;
 color: ${(props) => props.theme.text};
-border: 0;
+border: 1px rgba(0,0,0,0) solid;
 height: 4rem;
+cursor: pointer;
+transition: .2s background-color ease-in;
+transition: .2s border ease-in;
+position:relative;
+&:hover {
+  border: 1px white solid;
+  background-color: rgba(0,0,0,0.2);
+}
+
+&:after, &:before {
+  transition: .45s transform;
+  position: absolute;
+  content:'';
+  background-color: ${(props) => props.theme.text};
+  height: 2px;
+  width: .75rem;
+  top:calc(50% - 5px);
+}
+&:after {
+  transform: rotate(45deg);
+  right:0;
+  right:23px;
+
+  ${(props) => props.state.isWordSelectionContainerOpen ? `
+  transform: rotate(-45deg);
+` : ""
+  }
+
+}
+&:before {
+  transform: rotate(-45deg);
+  right:16px;
+  ${(props) => props.state.isWordSelectionContainerOpen ? `
+  transform: rotate(45deg);
+  ` : ""
+  }
+}
+
 `
 
 const WordSelectionModalElement = styled.button<WordSelectionModalElementProps>`
@@ -167,7 +213,7 @@ outline-color: ${(props) => props.theme.focus.default};
   color: ${(props) => props.theme.interactive.primary.hoverText};
 }
 
-${props => props.state.isUsed ? `
+${props => props.state.isDisabled ? `
 background-color: ${props.theme.interactive.primary.disabled};
 color: ${props.theme.interactive.primary.disabledText};
 border: 1px solid ${props.theme.interactive.primary.disabledText};
@@ -204,7 +250,7 @@ const DashboardContainer: React.FC = (() => {
   const [boardSize, setBoardSize] = useState(5);
   const [isWordModalShowing, setIsWordModalShowing] = useState(false);
   const [isGameMode, setIsGameMode] = useState(false);
-
+  const [isMobileWindow, setIsMobileWindow] = useState(false);
   const [isWordSelectionContainerOpen, setIsWordSelectionContainerOpen] = useState(false);
   const [isSelectingWord, setIsSelectingWord] = useState(false)
   const [bingoWordsOnBoard, setBingoWordsOnBoard] = useState<IBingoWord[]>([]);
@@ -218,7 +264,27 @@ const DashboardContainer: React.FC = (() => {
     }
   });
 
+  function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+      width,
+      height
+    };
+  }
+
+
   useEffect(() => {
+
+
+    const width = getWindowDimensions().width;
+
+    //TODO: rewirte tablet token to number
+    if (width > 768) {
+      setIsMobileWindow(false);
+    } else {
+      setIsMobileWindow(true)
+    }
+
 
     setBingoWords(data)
 
@@ -246,11 +312,7 @@ const DashboardContainer: React.FC = (() => {
 
   }
 
-  function GetWordFromChild(word: string) {
 
-    console.log(word);
-    setCurrentlySelectedWordBoxString(word);
-  }
 
   function switchWordbox() {
 
@@ -259,10 +321,10 @@ const DashboardContainer: React.FC = (() => {
   function setWordInBox(boxWord: string, bingoWordIndex: number) {
     let newBingoWords = bingoWords;
     let newBingoWordsOnBoardArray = bingoWordsOnBoard;
-    setIsWordSelectionContainerOpen(true)
+
+    isMobileWindow ? setIsWordSelectionContainerOpen(true) : setIsWordSelectionContainerOpen(false)
 
     if (bingoWords && newBingoWords) {
-      console.log(isSelectingWord);
 
       for (let i = 0; i < newBingoWords.length; i++) {
         if (newBingoWords[i].word === currentlySelectedWord?.word) {
@@ -278,8 +340,6 @@ const DashboardContainer: React.FC = (() => {
 
       let result1 = newBingoWordsOnBoardArray.filter(e => e.isUsed)
       let result2 = newBingoWords.filter(person => newBingoWordsOnBoardArray.every(person2 => !person2.word.includes(person.word)))
-      console.log(newBingoWords);
-      console.log(newBingoWordsOnBoardArray);
 
 
       for (let i = 0; i < result2.length; i++) {
@@ -303,45 +363,55 @@ const DashboardContainer: React.FC = (() => {
   return (
     <>
 
-      {isWordModalShowing ?
-        <ModalContainer onClick={() => { toggleModal() }}>
-
-        </ModalContainer> : ""}
-      <Button onClick={() => { setIsGameMode(!isGameMode) }} disabled={false} children={isGameMode ? "Game on" : "Select the words"}></Button>
+      <SectionContainer state={{ direction: "column", wrap: "flex-wrap", childrenFlex: 1 }}>
+        <h2>{isGameMode ? "Bingo mode" : "Word selection mode"}</h2>
+        <Button onClick={() => { setIsGameMode(!isGameMode) }} disabled={false} children={"Toggle mode"}></Button>
+      </SectionContainer>
       <SectionContainer state={{ direction: "row", wrap: "flex-wrap", childrenFlex: 1 }}>
         <GridWrapper state={{ gridSize: boardSize }}>
-          {bingoWordsOnBoard.map((x, i) =>
+          {bingoWordsOnBoard.map((x, i) => 
             <WordBox key={i} isGame={isGameMode} onClick={() => {
               isGameMode ? switchWordbox() :
-
                 setWordInBox(currentlySelectedWord ? currentlySelectedWord.word : "", i)
             }} word={currentlySelectedWord ? currentlySelectedWord.word : ""
 
             } />
+          
           )}
         </GridWrapper>
-        {isWordSelectionContainerOpen ? <MobileWrapperBg /> : ""}
+        {isWordSelectionContainerOpen ? <MobileWrapperBg onClick={() => { setIsWordSelectionContainerOpen(!isWordSelectionContainerOpen) }} /> : ""}
         <MobileWrapper state={{ isWordSelectionContainerOpen: isWordSelectionContainerOpen, isGameMode: isGameMode }} className='test'>
-          <WordSelectionContainer >
-            <DecoratedContainer >
-              <div className='top-header'>
-                <CardSheetButton onClick={() => setIsWordSelectionContainerOpen(!isWordSelectionContainerOpen)} 
-                state={{ isWordSelectionContainerOpen: isWordSelectionContainerOpen }}
-                disabled={false} children={"Valgt ord:"  + (currentlySelectedWord ? currentlySelectedWord?.word : "")}></CardSheetButton>
-              </div>
-              <WordSelectionModalListContainer>
-                <WordSelectionModalList className={"inner-list"}>
-                  {bingoWords?.map((wordObj: IBingoWord, i: number) => {
-                    return (
-                      <WordSelectionModalElement key={i} state={{ isUsed: wordObj.isUsed }} disabled={wordObj.isUsed} onClick={!wordObj.isUsed ? () => { elementClicked(wordObj) } : () => { }}>
-                        {wordObj.word}
-                      </WordSelectionModalElement>
-                    )
-                  })}
-                </WordSelectionModalList>
-              </WordSelectionModalListContainer>
-            </DecoratedContainer>
-          </WordSelectionContainer>
+          {
+            <WordSelectionContainer >
+              <DecoratedContainer >
+                <div className='top-header'>
+                  {isMobileWindow ?
+                    <CardSheetButton onClick={() => setIsWordSelectionContainerOpen(!isWordSelectionContainerOpen)}
+                      state={{ isWordSelectionContainerOpen: isWordSelectionContainerOpen }}
+                      disabled={false} children={(currentlySelectedWord ? "Valgt ord: " + currentlySelectedWord?.word :
+                        data ? " Velg et ord" : "Laster inn...")} />
+
+                    :
+
+                    <p>{(currentlySelectedWord ? "Valgt ord: " + currentlySelectedWord?.word :
+                      data ? " Velg et ord" : "Laster inn...")}</p>
+                  }
+                </div>
+                <WordSelectionModalListContainer>
+                  <WordSelectionModalList className={"inner-list"}>
+                    {bingoWords?.map((wordObj: IBingoWord, i: number) => {
+                      return (
+                        <WordSelectionModalElement key={i} state={{ isUsed: wordObj.isUsed, isDisabled: isGameMode || wordObj.isUsed }} disabled={isGameMode || wordObj.isUsed} onClick={!wordObj.isUsed ? () => { elementClicked(wordObj) } : () => { }}>
+                          {wordObj.word}
+                        </WordSelectionModalElement>
+                      )
+                    })}
+                  </WordSelectionModalList>
+                </WordSelectionModalListContainer>
+              </DecoratedContainer>
+            </WordSelectionContainer>
+
+          }
         </MobileWrapper>
 
       </SectionContainer>
