@@ -230,7 +230,7 @@ function App() {
           </OuterContainer>
         </ScreenContainer>
         <SectionContainer state={{ marginAuto: true }}>
-            <Button disabled={false} onClick={() => toggleAppTheme()}>Toggle theme</Button>
+            {/*<Button disabled={false} onClick={() => toggleAppTheme()}>Toggle theme</Button>*/}
             
         </SectionContainer>
       </Container>
