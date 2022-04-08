@@ -90,6 +90,12 @@ top: 110vh;
 const WordSelectionModalListContainer = styled.div`
 overflow-y: scroll;
 flex: auto;
+@media ${tokens.constants.device.tablet} { 
+/*hotfix*/
+margin-bottom: 11rem;
+
+
+}
 
 ::-webkit-scrollbar {
   width: 4px;
