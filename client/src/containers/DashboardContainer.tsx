@@ -92,7 +92,7 @@ overflow-y: scroll;
 flex: auto;
 @media ${tokens.constants.device.tablet} { 
 /*hotfix*/
-margin-bottom: 11rem;
+margin-bottom: 14rem;
 
 
 }
