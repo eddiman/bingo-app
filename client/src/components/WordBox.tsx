@@ -14,14 +14,18 @@ interface StyledWordBoxProps {
 
 const StyledWordBox = styled.button <StyledWordBoxProps>`
 position: relative;
-background-color: ${(props) => props.theme.background};
-border: 1px solid ${(props) => props.theme.interactive.primary.defaultText};
+background-color: unset;
+border: 1px solid ${(props) => props.theme.miscColors.color3};
 color: ${(props) => props.theme.text};
 cursor: pointer;
 padding:.5rem;
 transition: background-color .1s ease-in-out;
 outline-color: ${(props) => props.theme.focus.default};
 word-break: break-word;
+
+&:hover {
+    background-color: ${(props) => props.theme.miscColors.color2};
+}
 
 
 @media ${tokens.constants.device.tablet} {
@@ -32,7 +36,7 @@ word-break: break-word;
 }
 
 ${(props) => props.state.isSelected || props.state.isPrefilled ? `
-background-color: ${props.theme.miscColors.color4};
+background-color: ${props.theme.miscColors.color5};
  p {
     color: white;
  }

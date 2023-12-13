@@ -98,6 +98,31 @@ var colors = {
             "color-5" : "#651FFF",
         }
     },
+    christmas: {
+      primary: {
+        "30": "#232323",
+        "80": "#525F66",
+        "100": "#667780",
+        "130": "#94A0A6",
+        "180": "#E0E4E6",
+        "190": "#F0F1F2"
+      },
+      secondary: {
+        "30": "#1D1D18",
+        "80": "#4E4E40",
+        "100": "#626250",
+        "130": "#919185",
+        "180": "#E0E0DC",
+        "190": "#EFEFEE"
+      },
+        colorRange: {
+            "color-1" : "#1d4319",
+            "color-2" : "#819a47",
+            "color-3" : "#efd1a5",
+            "color-4" : "#af261c",
+            "color-5" : "#5d1c25",
+        }
+    },
   };
   
   export default colors;

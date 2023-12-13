@@ -6,11 +6,15 @@ import { styled } from './theme';
 interface StyledButtonProps {
     readonly state: {
         isDisabled: boolean
+
     };
 }
 
 const ButtonStyled = styled.button <StyledButtonProps>`
-background-color: ${(props) => props.theme.interactive.primary.default};
+flex:0;
+max-height:46px;
+
+background-color: ${(props) => props.theme.miscColors.color5};
 color: ${(props) => props.theme.interactive.primary.defaultText};
 min-width: 8rem;
 width: 8rem;
@@ -39,7 +43,7 @@ outline-color: ${(props) => props.theme.focus.default};
 }
 
 &:hover {
-  color: ${(props) => props.theme.interactive.primary.hoverText};
+  color: ${(props) => props.theme.miscColors.color5};
   height:calc(100% + 0px);
   
   &:after {

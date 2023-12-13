@@ -14,9 +14,9 @@ export const Decoration = styled.div<StyledDecoratorProps>`
 }
   height:${(props) =>props.state.size}px;
   width: ${(props) =>props.state.size}px;
-  
+  border-radius: 20px;
   position: absolute;
-  background-color: ${(props) => props.theme.text};
+  background-color: #ffe200};
   ${(props) => handleAlignment(props.state.alignPos, props.state.size) }
 
 `;

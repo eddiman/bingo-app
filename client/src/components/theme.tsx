@@ -1,6 +1,7 @@
 import { ITheme } from "../interfaces/Interfaces";
 import baseTokens from "../tokens/baseTokens";
 import piresTokens from "../tokens/piresTokens";
+import christmasTokens from "../tokens/christmasTokens";
 import baseStyled, { ThemedStyledInterface } from 'styled-components';
 import otTokens from "../tokens/otTokens";
 
@@ -168,6 +169,48 @@ export const otDarkTheme: ITheme = {
         color3: otTokens.miscColors.color3,
         color4: otTokens.miscColors.color4,
         color5: otTokens.miscColors.color5,
+    }
+};
+
+export const christmasLightTheme: ITheme = {
+    link: {
+        default: baseTokens.interactive.link.dark.default
+    },
+    focus: {
+        default: baseTokens.interactive.focusOutline.dark.default
+    },
+    background: baseTokens.ui.background.dark.background,
+    text: baseTokens.ui.background.dark.bodyText,
+    alphaBackground: baseTokens.ui.alphaBackground,
+
+    interactive: {
+        primary: {
+            default: christmasTokens.dark.interactive.primary.default,
+            defaultText: christmasTokens.dark.interactive.primary.defaultText,
+            hover: christmasTokens.dark.interactive.primary.hover,
+            hoverText: christmasTokens.dark.interactive.primary.hoverText,
+            active: christmasTokens.dark.interactive.primary.active,
+            activeText: christmasTokens.dark.interactive.primary.activeText,
+            disabled: christmasTokens.dark.interactive.primary.disabled,
+            disabledText: christmasTokens.dark.interactive.primary.disabledText,
+            focus: christmasTokens.dark.interactive.primary.focus,
+            label: christmasTokens.dark.interactive.primary.label,
+            border: christmasTokens.dark.interactive.primary.border
+        },
+        secondary: {
+            default: christmasTokens.dark.interactive.secondary.default,
+            hover: christmasTokens.dark.interactive.secondary.hover,
+            active: christmasTokens.dark.interactive.secondary.active,
+            focus: christmasTokens.dark.interactive.secondary.focus,
+            label: christmasTokens.dark.interactive.secondary.label
+        }
+    },
+    miscColors: {
+        color1: christmasTokens.miscColors.color1,
+        color2: christmasTokens.miscColors.color2,
+        color3: christmasTokens.miscColors.color3,
+        color4: christmasTokens.miscColors.color4,
+        color5: christmasTokens.miscColors.color5,
     }
 };
 

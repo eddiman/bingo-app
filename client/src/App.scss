@@ -1,17 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&display=swap');
 @import "rfs/scss";
 
 html{
-  font-family: "Open Sans";
+  font-family: 'Hedvig Letters Serif', serif;
   -webkit-font-smoothing: subpixel-antialiased;
+  background-color: black;
 }
 body {
   margin: 0;
 } 
 
 h1, h2, h3, h4 {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Hedvig Letters Serif', serif;
   margin: 0;
   letter-spacing: 1.5px;
 }
@@ -23,9 +25,12 @@ ul {
 h1 {
   margin: 0 0 1rem 0;
 }
+h2 {
+  text-overflow: ellipsis
+}
 
 p, span, a, tspan, button, li {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Hedvig Letters Serif', serif;
   letter-spacing: 0.5px;
 }
 
@@ -107,3 +112,50 @@ tspan {
       from { opacity: 0; }
       to   { opacity: .5; }
   }
+
+
+  // Snowfall.scss
+
+$animation-duration: 5s;
+
+body, html {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.snowfall-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.snowflake {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #fff;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+@for $i from 1 through 100 {
+  .snowflake-#{$i} {
+    top: random(100) + vh;
+    left: random(100) + vw;
+    animation-duration: $animation-duration + random(3);
+    animation-delay: random($animation-duration) + s;
+  }
+}

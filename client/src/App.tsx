@@ -13,14 +13,14 @@ import {
   useParams
 } from "react-router-dom";
 import TabButton from './components/TabButton';
-import { otDarkTheme, otLightTheme, piresDarkTheme, piresLightTheme, styled } from './components/theme';
+import { christmasLightTheme, styled } from './components/theme';
 import { Decoration } from './components/Decoration';
 import tokens from './tokens/baseTokens';
 import Button from './components/Button';
 import { SectionContainer } from './components/SectionContainer';
 
 const Container = styled.div`
-background-color: ${(props) => props.theme.background};
+background-color: ${(props) => props.theme.miscColors.color1};
 color: ${(props) => props.theme.text};
 padding: 2rem;
 display:flex;
@@ -46,7 +46,7 @@ width:100%;
 `;
 
 const OuterContainer = styled.div`
-border:1px solid ${(props) => props.theme.text};
+border:1px solid ${(props) => props.theme.miscColors.color3};
 position: relative;
 
 .color-bar {
@@ -105,12 +105,14 @@ position: relative;
 }
 `;
 const MainContainer = styled.div`
+display:flex;
+flex-direction: column;
 `;
 
 const Header = styled.header`
 display:flex;
 flex-direction: column;
-border-bottom: 1px solid ${(props) => props.theme.text};
+border-bottom: 1px solid ${(props) => props.theme.miscColors.color1};
 padding: 1.5rem 1.5rem 0 1.5rem;
 
     
@@ -168,9 +170,9 @@ function App() {
     console.log(localTheme);
 
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && !localTheme) {
-      setAppTheme("otDarkTheme");
+      setAppTheme("chr");
     } else {
-      setAppTheme(localTheme ? localTheme : "otLightTheme");
+      setAppTheme(localTheme ? localTheme : "christmasLightTheme");
     }
     window.addEventListener("beforeunload", (ev) => {
       ev.preventDefault();
@@ -181,28 +183,38 @@ function App() {
   const setAppTheme = (themeName: string) => {
     switch (themeName) {
 
-      case "otLightTheme":
-        setMainTheme(otLightTheme);
-        setLocalStorageTheme('otLightTheme')
+      case "christmasLightTheme":
+        setMainTheme(christmasLightTheme);
+        setLocalStorageTheme('christmasLightTheme')
         break;
-      case "otDarkTheme":
-        setMainTheme(otDarkTheme);
-        setLocalStorageTheme('otDarkTheme')
+      case "christmasLightTheme":
+        setMainTheme(christmasLightTheme);
+        setLocalStorageTheme('christmasLightTheme')
         break;
     }
   };
 
   const toggleAppTheme = () => {
-    if (getLocalStorageTheme() === "otDarkTheme") {
-      setAppTheme("otLightTheme");
+    if (getLocalStorageTheme() === "christmasLightTheme") {
+      setAppTheme("christmasLightTheme");
     } else {
-      setAppTheme("otDarkTheme");
+      setAppTheme("christmasLightTheme");
     }
   }
 
+  const Snowfall = () => {
+    return (
+      <div className="snowfall-container">
+        {Array.from({ length: 100 }, (_, index) => (
+          <div key={index} className={`snowflake snowflake-${index}`} />
+        ))}
+      </div>
+    );
 
+  };
   return (
     <BrowserRouter>
+      <Snowfall />
       <Container>
         <ScreenContainer>
           <OuterContainer>
@@ -219,7 +231,7 @@ function App() {
             <Decoration state={{ alignPos: "bottom-right", size: 10 }} />
             <MainContainer>
               <Header>
-                <h1>Bingo</h1>
+                <h1>Christmas Bingo</h1>
               </Header>
 
               <Routes>

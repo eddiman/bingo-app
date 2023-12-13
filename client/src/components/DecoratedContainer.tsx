@@ -4,8 +4,8 @@ import { styled } from "./theme";
 
 const StyledDecoratedContainer = styled.div`
 position: relative;
-background-color: ${(props) => props.theme.background};
-border: 1px solid ${(props) => props.theme.interactive.primary.defaultText};
+background-color: ${(props) => props.theme.miscColors.color5};
+border: 1px solid ${(props) => props.theme.miscColors.color3};
 color: ${(props) => props.theme.text};
 padding:.5rem;
 margin: auto;
