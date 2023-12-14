@@ -22,6 +22,7 @@ import { SectionContainer } from './components/SectionContainer';
 const Container = styled.div`
 background-color: ${(props) => props.theme.miscColors.color1};
 color: ${(props) => props.theme.text};
+height:100vh;
 padding: 2rem;
 display:flex;
 flex-direction: column;
@@ -166,6 +167,9 @@ function App() {
   const [currentTheme, setCurrentTheme] = useState(getLocalStorageTheme());
 
   useEffect(() => {
+
+    setMainTheme(christmasLightTheme);
+/*
     const localTheme = window.localStorage.getItem('theme');
     console.log(localTheme);
 
@@ -177,7 +181,7 @@ function App() {
     window.addEventListener("beforeunload", (ev) => {
       ev.preventDefault();
       return ev.returnValue = 'Are you sure you want to close?';
-    });
+    });*/
   }, []);
 
   const setAppTheme = (themeName: string) => {
