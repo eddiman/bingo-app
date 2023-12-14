@@ -240,7 +240,7 @@ interface GridProps {
 }
 const GridWrapper = styled.div<GridProps>`
 max-width: 640px;
-min-height: 640px;  
+
 display: grid;
   margin: 0 auto;
   grid-gap: 8px;
