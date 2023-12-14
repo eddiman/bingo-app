@@ -218,7 +218,6 @@ function App() {
   };
   return (
     <BrowserRouter>
-      <Snowfall />
       <Container>
         <ScreenContainer>
           <OuterContainer>
